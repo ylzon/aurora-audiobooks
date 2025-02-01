@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import librariesData from '@/mock/libraries.json';
+import librariesData from '@/mock/home.json';
 import { Colors } from '@/constants/Colors';
 import { CoverItem } from '@/components/book-item/CoverItem';
 import RecentAdditionItem from '@/components/book-item/RecentAdditionItem';
@@ -12,8 +12,11 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useNavigation } from 'expo-router';
+import { NavigationProp } from '@react-navigation/native';
 
 export default function HomeScreen() {
+  const navigation = useNavigation() as NavigationProp<any>;
   const theme = useColorScheme();
   const colors = Colors[theme || 'light'];
   const [isCloudOn, setIsCloudOn] = useState(false);
@@ -21,7 +24,7 @@ export default function HomeScreen() {
   const TopBar = () => {
     return (
       <ThemedView style={styles.topBar}>
-        <TouchableOpacity style={styles.topBarItem} onPress={() => { /* 处理点击事件 */ }}>
+        <TouchableOpacity style={styles.topBarItem} onPress={() => { }}>
           <Feather name="mic" size={20} color={colors.tint} />
           <Text style={[styles.topBarItemText, { color: colors.tint }]}>小说</Text>
         </TouchableOpacity>
@@ -33,7 +36,7 @@ export default function HomeScreen() {
               <MaterialIcons name="cloud-off" size={24} color="red" />
             )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.topBarItem} onPress={() => { /* 处理搜索点击事件 */ }}>
+          <TouchableOpacity style={styles.topBarItem} onPress={() => navigation.navigate('search')}>
             <Octicons name="search" size={24} color={colors.tint} />
           </TouchableOpacity>
         </View>
@@ -43,7 +46,7 @@ export default function HomeScreen() {
 
   const ContinueListening = () => {
     return (
-      <ThemedView style={styles.continueListening}>
+      <ThemedView style={[styles.continueListening, { backgroundColor: colors.homeHeaderBackground }]}>
         <TopBar />
         <ThemedText type="title">继续收听</ThemedText>
         <FlatList
@@ -137,7 +140,6 @@ const styles = StyleSheet.create({
   continueListening: {
     padding: 20,
     paddingRight: 0,
-    backgroundColor: Colors['light'].homeHeaderBackground,
   },
   recentContainer: {
     padding: 20,

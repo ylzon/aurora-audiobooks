@@ -1,0 +1,230 @@
+{
+  "filterdata": {
+    "authors": [
+      {
+        "id": "46de9fa9-41c7-4476-b399-11be3e8bf6e1",
+        "name": "J.K.罗琳"
+      },
+      {
+        "id": "42b01577-ba59-4add-bdb6-0a19ca1cfa30",
+        "name": "上译厂刘风"
+      },
+      {
+        "id": "0f8dfc21-ac48-47c8-af40-46742307a71c",
+        "name": "佛前献花"
+      },
+      {
+        "id": "db8cc39d-b528-48d4-a4fa-43c654e4808c",
+        "name": "刘慈欣"
+      },
+      {
+        "id": "3492cf37-a84a-4518-961e-2d460ac204a3",
+        "name": "加西亚·马尔克斯"
+      },
+      {
+        "id": "66168a78-a6a1-46d8-adc9-14382ec826d7",
+        "name": "单田芳"
+      },
+      {
+        "id": "753e898c-80f3-47aa-b1b7-d345bbae6fff",
+        "name": "卖报小郎君"
+      },
+      {
+        "id": "f84cf0f1-85b7-4a83-b390-4826a2d74286",
+        "name": "唐四方"
+      },
+      {
+        "id": "298c6b0d-c6bb-4752-927b-af092b530c34",
+        "name": "岸见一郎 / 古贺史健"
+      },
+      {
+        "id": "e79dc7c8-8f0b-4271-8b51-f13d22ee7419",
+        "name": "幼儿园一把手"
+      },
+      {
+        "id": "21eccee5-1e91-4a70-882e-a92054d0d04a",
+        "name": "张小花"
+      },
+      {
+        "id": "606e45f2-db86-4dea-a50f-b3b2a31eb980",
+        "name": "当年明月"
+      },
+      {
+        "id": "a81aa66e-7ed9-432d-b098-96101711d566",
+        "name": "德云社"
+      },
+      {
+        "id": "f2b036aa-6729-4b1a-b91b-5ed76c024b71",
+        "name": "志鸟村"
+      },
+      {
+        "id": "224d9c5c-d990-45c5-8e45-01fc19ac1582",
+        "name": "忘语"
+      },
+      {
+        "id": "c6c3bb1b-0353-4375-8d0c-cd8ecb16fe67",
+        "name": "我会修空调"
+      },
+      {
+        "id": "b629adaf-41fa-4343-8d04-0b1cc4362231",
+        "name": "戴尔·卡耐基"
+      },
+      {
+        "id": "1a58926b-b036-40fb-a5c2-bf8097877980",
+        "name": "明月地上霜"
+      },
+      {
+        "id": "f8693789-57fe-4238-8f63-1315cfe8b333",
+        "name": "杀虫队队员"
+      },
+      {
+        "id": "9d525dd4-8566-498f-8e54-3d980d2eedf7",
+        "name": "武志红"
+      },
+      {
+        "id": "728b6f06-e55c-4ee2-a31e-4e81514e64b7",
+        "name": "洛莉·戈特利布"
+      },
+      {
+        "id": "5c9a50f1-e118-4027-94c5-3877bed2a880",
+        "name": "烽火戏诸侯"
+      },
+      {
+        "id": "bfda2a67-ca1e-426b-be33-b20a806d55e9",
+        "name": "爱潜水的乌贼"
+      },
+      {
+        "id": "f4183e22-aa08-48f1-baa7-d5c13c7e16f3",
+        "name": "狐尾的笔"
+      },
+      {
+        "id": "340cf8a5-ff39-4bd6-a15a-9b8c7d309272",
+        "name": "纯洁滴小龙"
+      },
+      {
+        "id": "4acdf5f4-32ef-43ed-a88a-aa8a03f85203",
+        "name": "罗兰·米勒"
+      },
+      {
+        "id": "5d8c5585-facb-46ca-894a-4d4a09914824",
+        "name": "蒲松龄"
+      },
+      {
+        "id": "7788141c-2eac-473e-ad56-e60952846a56",
+        "name": "辰东"
+      },
+      {
+        "id": "7b190666-d6ee-400e-a9f4-00312294efc1",
+        "name": "马歇尔·卢森堡"
+      }
+    ],
+    "genres": [
+      "历史",
+      "名著",
+      "小说",
+      "心理",
+      "相声"
+    ],
+    "tags": [],
+    "series": [
+      {
+        "id": "ac6d5037-956e-4fbb-84f5-e723eafa5a6c",
+        "name": "三体"
+      },
+      {
+        "id": "b27990c5-2203-44ec-af16-a7e139dc6ae5",
+        "name": "哈利·波特"
+      },
+      {
+        "id": "994e94f9-dd1e-4b20-b649-b40e3fee0b0a",
+        "name": "四大名著"
+      },
+      {
+        "id": "b2dbb18e-8a77-4980-8fd7-f56c955618be",
+        "name": "德云社相声合集"
+      },
+      {
+        "id": "6a8cd35e-464c-4371-b42b-6b5d516437ba",
+        "name": "烽火戏诸侯作品"
+      }
+    ],
+    "narrators": [
+      "8082Audio",
+      "一种侃侃",
+      "上译厂刘风",
+      "传说中的方片K",
+      "光合积木",
+      "北冥有声",
+      "单田芳",
+      "喜马相声来乐",
+      "回响剧场",
+      "声之优",
+      "大斌",
+      "头陀渊",
+      "孙越",
+      "德云社",
+      "牛大宝",
+      "祝乐",
+      "类星体剧场"
+    ],
+    "languages": [],
+    "publishers": [
+      "Bagas Bantara",
+      "BEIJING BOOK CO. INC.",
+      "喜马拉雅"
+    ],
+    "publishedDecades": [
+      "2010",
+      "2020"
+    ],
+    "bookCount": 43,
+    "authorCount": 29,
+    "seriesCount": 5,
+    "podcastCount": 0,
+    "numIssues": 0,
+    "loadedAt": 1738350592010
+  },
+  "issues": 0,
+  "numUserPlaylists": 0,
+  "customMetadataProviders": [],
+  "library": {
+    "id": "b7db127c-9e7f-441b-a418-b859a235ef1d",
+    "name": "小说",
+    "folders": [
+      {
+        "id": "ce112364-4379-4d31-8282-ebbdd9935905",
+        "fullPath": "/audiobooks",
+        "libraryId": "b7db127c-9e7f-441b-a418-b859a235ef1d",
+        "addedAt": 1689126648333
+      }
+    ],
+    "displayOrder": 1,
+    "icon": "microphone-1",
+    "mediaType": "book",
+    "provider": "google",
+    "settings": {
+      "coverAspectRatio": 1,
+      "disableWatcher": false,
+      "skipMatchingMediaWithAsin": false,
+      "skipMatchingMediaWithIsbn": false,
+      "autoScanCronExpression": null,
+      "audiobooksOnly": false,
+      "epubsAllowScriptedContent": false,
+      "hideSingleBookSeries": false,
+      "onlyShowLaterBooksInContinueSeries": false,
+      "metadataPrecedence": [
+        "folderStructure",
+        "audioMetatags",
+        "nfoFile",
+        "txtFiles",
+        "opfFile",
+        "absMetadata"
+      ],
+      "podcastSearchRegion": "us"
+    },
+    "lastScan": 1737867347740,
+    "lastScanVersion": "2.18.1",
+    "createdAt": 1689126648333,
+    "lastUpdate": 1737867347740
+  }
+}

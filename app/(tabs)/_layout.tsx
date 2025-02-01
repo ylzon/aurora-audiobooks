@@ -86,6 +86,14 @@ const TabLayout = memo(() => {
           }}
         />
         <Tabs.Screen
+          name="search"
+          options={{
+            title: '',
+            tabBarIcon: () => null,
+            tabBarButton: () => null,
+          }}
+        />
+        <Tabs.Screen
           name="local"
           options={{
             title: '本地',
