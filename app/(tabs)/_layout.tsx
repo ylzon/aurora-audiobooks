@@ -4,15 +4,15 @@ import { Platform, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { SafeAreaView as SafeAreaViewContext } from 'react-native-safe-area-context';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { HapticTab } from '@/components/HapticTab';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { AnimatePage } from '@/components/animation/AnimatePage';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Easing } from 'react-native-reanimated';
 import itemData from '@/mock/items.json';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import AntDesign from '@expo/vector-icons/AntDesign';
+
 const imgUrl = `http://192.168.31.5:13378/audiobookshelf/api/items/${(itemData as any).id}/cover?ts=${(itemData as any).updatedAt}`;
 
 const TabLayout = memo(() => {
@@ -45,6 +45,7 @@ const TabLayout = memo(() => {
     tabBarInactiveTintColor: inactiveColor,
     tabBarLabelStyle: {
       fontSize: 12,
+      marginBottom: -10,
     },
     tabBarStyle: Platform.select({
       ios: {
@@ -65,13 +66,13 @@ const TabLayout = memo(() => {
       style={{ flex: 1 }}
       edges={['bottom'] as const}
     >
-      <Tabs screenOptions={screenOptions}>
+      <Tabs screenOptions={screenOptions} safeAreaInsets={{ bottom: 4, top: 20 }}>
         <Tabs.Screen
           name="index"
           options={{
             title: '首页',
             tabBarIcon: ({ color }) => (
-              <Ionicons name="home" size={24} color={color} />
+              <Ionicons name="home-outline" size={24} color={color} />
             ),
           }}
         />
@@ -80,7 +81,25 @@ const TabLayout = memo(() => {
           options={{
             title: '书库',
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="bookshelf" size={24} color={color} />
+              <Ionicons name="library-outline" size={24} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="local"
+          options={{
+            title: '本地',
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="file-tray-outline" size={24} color="black" />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="my"
+          options={{
+            title: '我的',
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="user" size={24} color="black" />
             ),
           }}
         />
