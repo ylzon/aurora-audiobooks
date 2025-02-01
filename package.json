@@ -9,7 +9,10 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "build:android": "expo build --platform android --profile production",
+    "build:ios": "expo build --platform ios --profile production",
+    "build:web": "expo build --platform web --profile production"
   },
   "jest": {
     "preset": "jest-expo"

@@ -1,11 +1,11 @@
-# Aurora Audiobooks 📚
+# [WIP]Aurora Audiobooks 📚
 
 [![][license-badge]][license-url]
 [![][expoversion-badge]][expoversion-url]
 
-[license-badge]: https://img.shields.io/github/license/yourusername/aurora-audiobooks?style=flat-square
+[license-badge]: https://img.shields.io/github/license/ylzon/aurora-audiobooks?style=flat-square
 [license-url]: LICENSE
-[expoversion-badge]: https://img.shields.io/badge/Expo-50.0.0-blue.svg?style=flat-square
+[expoversion-badge]: https://img.shields.io/badge/Expo-52.0.28-blue.svg?style=flat-square
 [expoversion-url]: https://expo.dev/
 
 [English Version](README.en.md) | [中文版本](README.md)
@@ -18,6 +18,7 @@ A third-party mobile client based on Audiobookshelf, dedicated to enhancing the 
 - ⏸️ Sleep timer that stops playback by episode.
 - 🌗 Theme switching functionality.
 - 🌩 Improved user experience with faster load times.
+- 📚 Removed unnecessary features to keep it clean.
 
 ## 🛠️ Tech Stack
 - React Native
@@ -43,6 +44,16 @@ npm run ios
 ```
 ```bash
 npm run web
+```
+4. Build the project:
+```bash
+npm run build:android
+```
+```bash
+npm run build:ios
+```
+```bash
+npm run build:web
 ```
 
 ## 📦 Project Structure

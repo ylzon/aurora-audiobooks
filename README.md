@@ -1,4 +1,4 @@
-# 极光听书 Aurora Audiobooks 📚
+# [WIP]极光听书 Aurora Audiobooks 📚
 
 [![][license-badge]][license-url] 
 [![][expoversion-badge]][expoversion-url]
@@ -18,6 +18,7 @@
 - ⏸️ 添加睡眠定时器按集关闭功能
 - 🌗 添加主题切换功能
 - 🌩 优化使用体验，提高加载速度
+- 📚 移除多余功能，保持简洁
 
 ## 🛠️ 技术栈
 - React Native
@@ -43,6 +44,16 @@ npm run ios
 ```
 ```bash
 npm run web
+```
+4. 打包构建
+```bash
+npm run build:android
+```
+```bash
+npm run build:ios
+```
+```bash
+npm run build:web
 ```
 
 ## 📦 项目结构
