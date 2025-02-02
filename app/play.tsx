@@ -10,10 +10,14 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { AnimatePage } from '@/components/animation/AnimatePage';
 import { ProgressBar } from '@/components/ProgressBar';
 import itemData from '@/mock/items.json';
+import { SleepTimer } from '@/features/player/SleepTimer';
 
 export default function PlayScreen() {
   const navigation = useNavigation() as NavigationProp<any>;
   const [currentTime, setCurrentTime] = useState(0);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [isSleepTimerEnabled, setIsSleepTimerEnabled] = useState(false);
+  const [sleepTimerValue, setSleepTimerValue] = useState<string | null>(null);
   const {
     media: {
       metadata: {
@@ -63,7 +67,7 @@ export default function PlayScreen() {
 
           <View style={styles.controls}>
             <TouchableOpacity style={styles.controlButton}>
-              <AntDesign name="doubleleft" size={36} color="#fff" />
+              <AntDesign name="left" size={36} color="#fff" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.controlButton}>
               <MaterialIcons name="replay-10" size={36} color="#fff" />
@@ -80,27 +84,50 @@ export default function PlayScreen() {
               <MaterialIcons name="forward-10" size={36} color="#fff" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.controlButton}>
-              <AntDesign name="doubleright" size={36} color="#fff" />
+              <AntDesign name="right" size={36} color="#fff" />
             </TouchableOpacity>
           </View>
 
           <View style={styles.otherControls}>
-            <TouchableOpacity style={styles.otherControlButton}>
-              <Ionicons name="moon-outline" size={22} color="#fff" />
+            <TouchableOpacity
+              style={styles.otherControlButton}
+              onPress={() => setIsDrawerVisible(true)}
+            >
+              <View style={styles.otherControlContent}>
+                <Ionicons name="moon-outline" size={22} color="#fff" />
+                <Text style={styles.otherControlText}>播放完当前章</Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.otherControlButton}>
-              <Ionicons name="speedometer-outline" size={22} color="#fff" />
+              <View style={styles.otherControlContent}>
+                <Ionicons name="speedometer-outline" size={22} color="#fff" />
+                <Text style={styles.otherControlText}>1.25x</Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.otherControlButton}>
-              <Ionicons name="play-skip-forward-circle-outline" size={24} color="#fff" />
+              <View style={styles.otherControlContent}>
+                <Ionicons name="play-skip-forward-circle-outline" size={24} color="#fff" />
+                <Text style={styles.otherControlText}>15s/30s</Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.otherControlButton}>
-              <FontAwesome5 name="list-ul" size={20} color="#fff" />
+              <View style={styles.otherControlContent}>
+                <FontAwesome5 name="list-ul" size={20} color="#fff" />
+                <Text style={styles.otherControlText}>章节列表</Text>
+              </View>
             </TouchableOpacity>
           </View>
         </BlurView>
       </ImageBackground>
-    </AnimatePage>
+      <SleepTimer
+        visible={isDrawerVisible}
+        onClose={() => setIsDrawerVisible(false)}
+        value={sleepTimerValue}
+        enabled={isSleepTimerEnabled}
+        onValueChange={setSleepTimerValue}
+        onSwitchChange={setIsSleepTimerEnabled}
+      />
+    </AnimatePage >
   );
 }
 
@@ -176,11 +203,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    // 居于底部
     width: '100%',
+    marginTop: 24,
   },
   otherControlButton: {
-    paddingTop: 30,
+    paddingHorizontal: 12,
+  },
+  otherControlContent: {
+    alignItems: 'center',
+    gap: 4,
+  },
+  otherControlText: {
+    marginTop: 2,
+    fontSize: 10,
+    color: 'rgba(255,255,255,0.5)',
+    textAlign: 'center',
   },
   headerLeft: {
     paddingLeft: 24,
