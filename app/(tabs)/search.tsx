@@ -27,8 +27,8 @@ export default function SearchScreen() {
       headerHeight={110}
       fixedHeader
       headerBackgroundColor={{
-        light: Colors['light'].homeHeaderBackground,
-        dark: Colors['dark'].homeHeaderBackground
+        light: Colors['light'].cardBackground,
+        dark: Colors['dark'].cardBackground
       }}
       header={
         <View style={styles.headerContainer}>

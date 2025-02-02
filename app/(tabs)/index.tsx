@@ -46,7 +46,7 @@ export default function HomeScreen() {
 
   const ContinueListening = () => {
     return (
-      <ThemedView style={[styles.continueListening, { backgroundColor: colors.homeHeaderBackground }]}>
+      <ThemedView style={[styles.continueListening, { backgroundColor: colors.cardBackground }]}>
         <TopBar />
         <ThemedText type="title">继续收听</ThemedText>
         <FlatList
@@ -92,8 +92,8 @@ export default function HomeScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{
-        light: Colors['light'].homeHeaderBackground,
-        dark: Colors['dark'].homeHeaderBackground
+        light: Colors['light'].cardBackground,
+        dark: Colors['dark'].cardBackground
       }}
       header={
         <ContinueListening />
