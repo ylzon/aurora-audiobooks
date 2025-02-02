@@ -46,9 +46,11 @@ export function SleepTimer({ visible, onClose, value, enabled, onValueChange, on
     onSwitchChange(switchValue);
     if (!switchValue) {
       onValueChange(null);
+      setSleepTimerText(null);
     }
     if (switchValue && !value) {
       onValueChange(chapterMap[0].key);
+      setSleepTimerText(chapterMap[0].value);
     }
   };
 

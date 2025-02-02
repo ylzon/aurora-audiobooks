@@ -28,7 +28,7 @@ interface MultiTagsProps extends BaseTagsProps {
 type TagsProps = SingleTagsProps | MultiTagsProps;
 
 const FONT_SIZE = 14;
-const PADDING = 14;
+const PADDING = 12;
 
 export function Tags(props: TagsProps) {
   const theme = useColorScheme();
