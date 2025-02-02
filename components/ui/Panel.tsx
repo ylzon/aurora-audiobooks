@@ -14,6 +14,7 @@ import {
   Dimensions,
   PanResponder,
   ScrollViewProps,
+  BackHandler,
 } from 'react-native';
 
 const FULL_HEIGHT = Dimensions.get('window').height;
@@ -166,6 +167,21 @@ const SwipeablePanel = ({
       animateTo(STATUS.CLOSED);
     }
   }, [propIsActive, animateTo, onlyLarge, onlySmall, openLarge]);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        if (propIsActive) {
+          onClose();
+          return true; // 阻止默认返回行为
+        }
+        return false; // 继续默认行为
+      }
+    );
+
+    return () => backHandler.remove();
+  }, [propIsActive, onClose]);
 
   const panResponder = useRef(
     PanResponder.create({
