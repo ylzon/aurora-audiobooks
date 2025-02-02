@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity, useColorScheme } from 'react-native';
-import { SwipeablePanel, SwipeablePanelProps } from '../components/ui/Panel';
+import { View, StyleSheet, Text, ScrollView, useColorScheme } from 'react-native';
+import { SwipeablePanel, SwipeablePanelProps } from './ui/SwipeablePanel';
 import { Colors } from '@/constants/Colors';
 
 interface PanelDrawerProps extends Omit<SwipeablePanelProps, 'isActive' | 'children'> {

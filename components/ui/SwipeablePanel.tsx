@@ -27,6 +27,8 @@ const STATUS = {
   LARGE: 2,
 };
 
+const ANIMATION_DURATION = 300;
+
 interface SwipeablePanelProps {
   isActive: boolean; // 是否显示
   onClose: () => void; // 关闭回调
@@ -107,14 +109,21 @@ const SwipeablePanel = ({
     setShowComponent(true);
     setStatus(newStatus);
 
-    Animated.spring(pan, {
-      toValue: { x: 0, y: newY },
-      tension: 80,
-      friction: 25,
-      useNativeDriver: true,
-      restDisplacementThreshold: 10,
-      restSpeedThreshold: 10,
-    }).start(() => {
+    Animated.parallel([
+      Animated.spring(pan, {
+        toValue: { x: 0, y: newY },
+        tension: 80,
+        friction: 25,
+        useNativeDriver: true,
+        restDisplacementThreshold: 10,
+        restSpeedThreshold: 10,
+      }),
+      Animated.timing(pan, {
+        toValue: { x: 0, y: newY },
+        duration: ANIMATION_DURATION,
+        useNativeDriver: true,
+      })
+    ]).start(() => {
       if (newStatus === STATUS.CLOSED) {
         onClose();
         setShowComponent(false);
@@ -229,7 +238,6 @@ const SwipeablePanel = ({
       style={[
         styles.background,
         {
-          backgroundColor: noBackgroundOpacity ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)',
           height: allowTouchOutside ? 'auto' : deviceDimensions.height,
           width: deviceDimensions.width,
         },
@@ -291,7 +299,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   panel: {
     position: 'absolute',
