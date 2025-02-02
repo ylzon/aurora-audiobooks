@@ -8,6 +8,8 @@ import 'react-native-reanimated';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import { I18nextProvider } from 'react-i18next';
+import i18n from '../utils/i18n';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -38,27 +40,29 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaProvider>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-          <Stack
-            screenOptions={{
-              headerShown: false,
-            }}
-          >
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-            <Stack.Screen
-              name="play"
-              options={{
-                ...customTransition,
-                contentStyle: { backgroundColor: 'transparent' },
+    <SafeAreaProvider>
+      <I18nextProvider i18n={i18n}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+            <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+            <Stack
+              screenOptions={{
+                headerShown: false,
               }}
-            />
-          </Stack>
-        </ThemeProvider>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+            >
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+              <Stack.Screen
+                name="play"
+                options={{
+                  ...customTransition,
+                  contentStyle: { backgroundColor: 'transparent' },
+                }}
+              />
+            </Stack>
+          </ThemeProvider>
+        </GestureHandlerRootView>
+      </I18nextProvider>
+    </SafeAreaProvider>
   );
 }

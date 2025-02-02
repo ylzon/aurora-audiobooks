@@ -11,6 +11,7 @@ import { AnimatePage } from '@/components/animation/AnimatePage';
 import { ProgressBar } from '@/components/ProgressBar';
 import itemData from '@/mock/items.json';
 import { SleepTimer } from '@/features/player/SleepTimer';
+import { useTranslation } from 'react-i18next';
 
 export default function PlayScreen() {
   const navigation = useNavigation() as NavigationProp<any>;
@@ -18,6 +19,7 @@ export default function PlayScreen() {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [isSleepTimerEnabled, setIsSleepTimerEnabled] = useState(false);
   const [sleepTimerValue, setSleepTimerValue] = useState<string | null>(null);
+  const [sleepTimerText, setSleepTimerText] = useState<string | null>(null);
   const {
     media: {
       metadata: {
@@ -32,6 +34,8 @@ export default function PlayScreen() {
   } = itemData as any;
   const currentChapter = chapters[0];
   const imgUrl = `http://192.168.31.5:13378/audiobookshelf/api/items/${id}/cover?ts=${updatedAt}`;
+  const { t } = useTranslation();
+
   return (
     <AnimatePage navigation={navigation}>
       <ImageBackground
@@ -53,8 +57,8 @@ export default function PlayScreen() {
           />
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.chapter}>{currentChapter.title}</Text>
-          <Text style={styles.author}>作者: {authors[0].name}</Text>
-          <Text style={styles.narrator}>播讲: {narrators[0]}</Text>
+          <Text style={styles.author}>{t('author')}: {authors[0].name}</Text>
+          <Text style={styles.narrator}>{t('narrator')}: {narrators[0]}</Text>
 
           <ProgressBar
             duration={360}
@@ -95,7 +99,7 @@ export default function PlayScreen() {
             >
               <View style={styles.otherControlContent}>
                 <Ionicons name="moon-outline" size={22} color="#fff" />
-                <Text style={styles.otherControlText}>播放完当前章</Text>
+                <Text style={styles.otherControlText}>{sleepTimerText || t('sleep-timer')}</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.otherControlButton}>
@@ -113,7 +117,7 @@ export default function PlayScreen() {
             <TouchableOpacity style={styles.otherControlButton}>
               <View style={styles.otherControlContent}>
                 <FontAwesome5 name="list-ul" size={20} color="#fff" />
-                <Text style={styles.otherControlText}>章节列表</Text>
+                <Text style={styles.otherControlText}>{t('chapter-list')}</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -126,6 +130,7 @@ export default function PlayScreen() {
         enabled={isSleepTimerEnabled}
         onValueChange={setSleepTimerValue}
         onSwitchChange={setIsSleepTimerEnabled}
+        setSleepTimerText={setSleepTimerText}
       />
     </AnimatePage >
   );

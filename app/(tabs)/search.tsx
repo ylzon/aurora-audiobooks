@@ -10,12 +10,14 @@ import { useNavigation } from 'expo-router';
 import { NavigationProp } from '@react-navigation/native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useTranslation } from 'react-i18next';
 
 export default function SearchScreen() {
   const navigation = useNavigation() as NavigationProp<any>;
   const [searchQuery, setSearchQuery] = useState('');
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
+  const { t } = useTranslation();
 
   const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
@@ -45,7 +47,7 @@ export default function SearchScreen() {
                 backgroundColor: colors.background,
                 paddingRight: 40,
               }]}
-              placeholder="搜索内容"
+              placeholder={t('search-placeholder')}
               placeholderTextColor={colors.textPlaceholder}
               value={searchQuery}
               onChangeText={handleSearch}
@@ -68,7 +70,7 @@ export default function SearchScreen() {
     >
       {!searchQuery && (
         <View style={styles.searchContainer}>
-          <ThemedText type="title">搜索结果({searchData.book.length})</ThemedText>
+          <ThemedText type="title">{t('search-result')} ({searchData.book.length})</ThemedText>
           <FlatList
             data={searchData.book as any}
             keyExtractor={(item) => item.libraryItem.id}

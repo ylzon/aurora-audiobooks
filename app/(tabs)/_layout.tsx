@@ -12,6 +12,7 @@ import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Eas
 import itemData from '@/mock/items.json';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useTranslation } from 'react-i18next';
 
 const imgUrl = `http://192.168.31.5:13378/audiobookshelf/api/items/${(itemData as any).id}/cover?ts=${(itemData as any).updatedAt}`;
 
@@ -21,7 +22,7 @@ const TabLayout = memo(() => {
   const activeColor = Colors[colorScheme ?? 'light'].tint;
   const inactiveColor = Colors[colorScheme ?? 'light'].icon;
   const backgroundColor = Colors[colorScheme ?? 'light'].background;
-
+  const { t } = useTranslation();
   const rotation = useSharedValue(0);
 
   const animatedStyles = useAnimatedStyle(() => ({
@@ -70,7 +71,7 @@ const TabLayout = memo(() => {
         <Tabs.Screen
           name="index"
           options={{
-            title: '首页',
+            title: t('home'),
             tabBarIcon: ({ color }) => (
               <Ionicons name="home-outline" size={24} color={color} />
             ),
@@ -79,7 +80,7 @@ const TabLayout = memo(() => {
         <Tabs.Screen
           name="explore"
           options={{
-            title: '书库',
+            title: t('library'),
             tabBarIcon: ({ color }) => (
               <Ionicons name="library-outline" size={24} color={color} />
             ),
@@ -96,16 +97,16 @@ const TabLayout = memo(() => {
         <Tabs.Screen
           name="local"
           options={{
-            title: '本地',
+            title: t('local'),
             tabBarIcon: ({ color }) => (
               <Ionicons name="file-tray-outline" size={24} color="black" />
             ),
           }}
         />
         <Tabs.Screen
-          name="my"
+          name="profile"
           options={{
-            title: '我的',
+            title: t('profile'),
             tabBarIcon: ({ color }) => (
               <AntDesign name="user" size={24} color="black" />
             ),

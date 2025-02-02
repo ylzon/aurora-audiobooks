@@ -5,6 +5,7 @@ import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { Feather } from '@expo/vector-icons';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useTranslation } from 'react-i18next';
 interface RecentAdditionItemProps {
   title?: string;
   authorName?: string;
@@ -22,13 +23,14 @@ const formatDate = (dateString?: string): string => {
 const RecentAdditionItem: React.FC<RecentAdditionItemProps> = ({ title, authorName, narratorName, addedAt, coverUrl, onPlayPress }) => {
   const theme = useColorScheme();
   const colors = Colors[theme || 'light'];
+  const { t } = useTranslation();
   return (
     <ThemedView style={styles.container}>
       <Image source={{ uri: coverUrl }} style={styles.coverImage} />
       <View style={styles.infoContainer}>
         <ThemedText style={styles.title}>{title || 'Unknown'}</ThemedText>
-        <ThemedText style={styles.author}>作者: {authorName || 'Unknown'}</ThemedText>
-        <ThemedText style={styles.narrator}>播讲: {narratorName || 'Unknown'}</ThemedText>
+        <ThemedText style={styles.author}>{t('author')}: {authorName || 'Unknown'}</ThemedText>
+        <ThemedText style={styles.narrator}>{t('narrator')}: {narratorName || 'Unknown'}</ThemedText>
         <ThemedText style={styles.date}>{formatDate(addedAt)}</ThemedText>
       </View>
       <TouchableOpacity style={styles.playButton} onPress={onPlayPress}>

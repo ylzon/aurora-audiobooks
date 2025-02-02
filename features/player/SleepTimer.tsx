@@ -6,7 +6,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { Tags } from '@/components/Tags';
 import Divider from '@/components/Divider';
 import { Button } from '@/components/Button';
-
+import { useTranslation } from 'react-i18next';
 interface SleepTimerProps {
   visible: boolean;
   onClose: () => void;
@@ -14,25 +14,27 @@ interface SleepTimerProps {
   enabled: boolean;
   onValueChange: (value: string | null) => void;
   onSwitchChange: (value: boolean) => void;
+  setSleepTimerText: (value: string | null) => void;
 }
 
-export function SleepTimer({ visible, onClose, value, enabled, onValueChange, onSwitchChange }: SleepTimerProps) {
+export function SleepTimer({ visible, onClose, value, enabled, onValueChange, onSwitchChange, setSleepTimerText }: SleepTimerProps) {
+  const { t } = useTranslation();
   const chapterMap = [
-    { key: 'chapter-1', value: '当前章' },
-    { key: 'chapter-2', value: '播完2章' },
-    { key: 'chapter-3', value: '播完3章' },
-    { key: 'chapter-4', value: '播完4章' },
-    { key: 'chapter-5', value: '播完5章' },
-    { key: 'chapter-6', value: '播完6章' },
-    { key: 'chapter-7', value: '播完7章' },
-    { key: 'chapter-8', value: '播完8章' },
+    { key: 'chapter-1', value: t('current-chapter') },
+    { key: 'chapter-2', value: t('finish-2-chapters') },
+    { key: 'chapter-3', value: t('finish-3-chapters') },
+    { key: 'chapter-4', value: t('finish-4-chapters') },
+    { key: 'chapter-5', value: t('finish-5-chapters') },
+    { key: 'chapter-6', value: t('finish-6-chapters') },
+    { key: 'chapter-7', value: t('finish-7-chapters') },
+    { key: 'chapter-8', value: t('finish-8-chapters') },
   ];
 
   const timeMap = [
-    { key: 'time-15', value: '15分钟' },
-    { key: 'time-30', value: '30分钟' },
-    { key: 'time-60', value: '60分钟' },
-    { key: 'time-90', value: '90分钟' },
+    { key: 'time-15', value: t('15-minutes') },
+    { key: 'time-30', value: t('30-minutes') },
+    { key: 'time-60', value: t('60-minutes') },
+    { key: 'time-90', value: t('90-minutes') },
   ];
 
   const subTitle = value && (
@@ -57,12 +59,12 @@ export function SleepTimer({ visible, onClose, value, enabled, onValueChange, on
     } else {
       onSwitchChange(true);
     }
-
+    setSleepTimerText(chapterMap.find(item => item.key === value)?.value || timeMap.find(item => item.key === value)?.value || '');
   };
 
   return (
     <PanelDrawer
-      title="睡眠定时器"
+      title={t('sleep-timer')}
       subTitle={subTitle}
       visible={visible}
       onClose={onClose}
@@ -74,7 +76,7 @@ export function SleepTimer({ visible, onClose, value, enabled, onValueChange, on
       }
     >
       <View style={styles.section}>
-        <ThemedText type="subtitle" style={styles.subtitle}>按章数</ThemedText>
+        <ThemedText type="subtitle" style={styles.subtitle}>{t('by-chapter')}</ThemedText>
         <Tags
           value={value}
           tags={chapterMap}
@@ -83,7 +85,7 @@ export function SleepTimer({ visible, onClose, value, enabled, onValueChange, on
       </View>
       <Divider />
       <View style={styles.section}>
-        <ThemedText type="subtitle" style={styles.subtitle}>按时间</ThemedText>
+        <ThemedText type="subtitle" style={styles.subtitle}>{t('by-time')}</ThemedText>
         <Tags
           value={value}
           tags={timeMap}
@@ -96,7 +98,7 @@ export function SleepTimer({ visible, onClose, value, enabled, onValueChange, on
         onPress={onClose}
         style={{ margin: 12 }}
       >
-        关闭
+        {t('close')}
       </Button>
     </PanelDrawer>
   );

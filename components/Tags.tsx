@@ -28,7 +28,7 @@ interface MultiTagsProps extends BaseTagsProps {
 type TagsProps = SingleTagsProps | MultiTagsProps;
 
 const FONT_SIZE = 14;
-const PADDING = 10;
+const PADDING = 14;
 
 export function Tags(props: TagsProps) {
   const theme = useColorScheme();
@@ -46,11 +46,11 @@ export function Tags(props: TagsProps) {
   }, [props.value]);
 
   // 根据 tags 数组最大字符数计算每个标签的宽度
-  const computedTagWidth = useMemo(() => {
-    const maxTagLength = props.tags.reduce((max, tag) => Math.max(max, tag.value.length), 0);
-    // 每个字符预估宽度 10，加上左右内边距共 24
-    return maxTagLength * FONT_SIZE + PADDING * 2;
-  }, [props.tags]);
+  // const computedTagWidth = useMemo(() => {
+  //   const maxTagLength = props.tags.reduce((max, tag) => Math.max(max, tag.value.length), 0);
+  //   // 每个字符预估宽度 10，加上左右内边距共 24
+  //   return maxTagLength * FONT_SIZE + PADDING * 2;
+  // }, [props.tags]);
 
   function handlePress(tagKey: string) {
     if (props.multi) {
@@ -80,7 +80,6 @@ export function Tags(props: TagsProps) {
           {
             ...styles.tag,
             backgroundColor: colors.tagBackground,
-            width: computedTagWidth, // 固定宽度应用到每个标签
           },
           isSelected && {
             ...styles.tagSelected,

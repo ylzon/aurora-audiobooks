@@ -14,19 +14,21 @@ import Octicons from '@expo/vector-icons/Octicons';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useNavigation } from 'expo-router';
 import { NavigationProp } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 export default function HomeScreen() {
   const navigation = useNavigation() as NavigationProp<any>;
   const theme = useColorScheme();
   const colors = Colors[theme || 'light'];
   const [isCloudOn, setIsCloudOn] = useState(false);
+  const { t } = useTranslation();
 
   const TopBar = () => {
     return (
       <ThemedView style={styles.topBar}>
         <TouchableOpacity style={styles.topBarItem} onPress={() => { }}>
           <Feather name="mic" size={20} color={colors.tint} />
-          <Text style={[styles.topBarItemText, { color: colors.tint }]}>小说</Text>
+          <Text style={[styles.topBarItemText, { color: colors.tint }]}>{t('novel')}</Text>
         </TouchableOpacity>
         <View style={styles.topBarItemContainer}>
           <TouchableOpacity style={[styles.topBarItem, { marginRight: 8 }]} onPress={() => setIsCloudOn(!isCloudOn)}>
@@ -48,7 +50,7 @@ export default function HomeScreen() {
     return (
       <ThemedView style={[styles.continueListening, { backgroundColor: colors.cardBackground }]}>
         <TopBar />
-        <ThemedText type="title">继续收听</ThemedText>
+        <ThemedText type="title">{t('keep-listening')}</ThemedText>
         <FlatList
           data={librariesData[0].entities as any}
           keyExtractor={(item) => item.id}
@@ -71,7 +73,7 @@ export default function HomeScreen() {
   const RecentAdditions = () => {
     return (
       <ThemedView style={styles.recentContainer}>
-        <ThemedText type="title">最近添加</ThemedText>
+        <ThemedText type="title">{t('recent-additions')}</ThemedText>
         <FlatList
           data={librariesData[1].entities as any}
           keyExtractor={(item) => item.id}

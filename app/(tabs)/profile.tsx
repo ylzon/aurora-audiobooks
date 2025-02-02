@@ -1,4 +1,6 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet, Image, Platform, TouchableOpacity, View, Button } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
@@ -6,8 +8,21 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { getCurrentLanguage, changeLanguage } from '@/utils/i18n';
 
 export default function MyScreen() {
+  const { t } = useTranslation();
+  const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
+
+  const handleLanguageChange = async (lng: string) => {
+    try {
+      await changeLanguage(lng);
+      setCurrentLang(lng);
+    } catch (error) {
+      console.error('Language change failed:', error);
+    }
+  };
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -20,7 +35,19 @@ export default function MyScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">My</ThemedText>
+        <ThemedText type="title">{t('profile')}</ThemedText>
+        <View>
+          <Button
+            title="English"
+            onPress={() => handleLanguageChange('en')}
+            disabled={currentLang === 'en'}
+          />
+          <Button
+            title="中文"
+            onPress={() => handleLanguageChange('zh')}
+            disabled={currentLang === 'zh'}
+          />
+        </View>
       </ThemedView>
       <ThemedText>This app includes example code to help you get started.</ThemedText>
       <Collapsible title="File-based routing">
@@ -105,5 +132,14 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+    alignItems: 'center',
+  },
+  languageButton: {
+    marginLeft: 'auto',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#808080',
   },
 });
