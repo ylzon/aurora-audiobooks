@@ -38,7 +38,7 @@ export default function SearchScreen() {
             style={styles.iconButton}
             onPress={() => navigation.goBack()}
           >
-            <AntDesign name="left" size={24} color={colors.tint} />
+            <AntDesign name="left" size={24} color={colors.primary} />
           </TouchableOpacity>
 
           <View style={styles.inputWrapper}>

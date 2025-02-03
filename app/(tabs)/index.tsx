@@ -11,35 +11,39 @@ import Feather from '@expo/vector-icons/Feather';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { useNavigation } from 'expo-router';
 import { NavigationProp } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { useColors } from '@/utils/theme';
 
 export default function HomeScreen() {
   const navigation = useNavigation() as NavigationProp<any>;
-  const theme = useColorScheme();
-  const colors = Colors[theme || 'light'];
+  const colors = useColors();
   const [isCloudOn, setIsCloudOn] = useState(false);
   const { t } = useTranslation();
+
+  const topBarItemStyle = {
+    ...styles.topBarItem,
+    backgroundColor: colors.background,
+  };
 
   const TopBar = () => {
     return (
       <ThemedView style={styles.topBar}>
-        <TouchableOpacity style={styles.topBarItem} onPress={() => { }}>
-          <Feather name="mic" size={20} color={colors.tint} />
-          <Text style={[styles.topBarItemText, { color: colors.tint }]}>{t('novel')}</Text>
+        <TouchableOpacity style={topBarItemStyle} onPress={() => { }}>
+          <Feather name="mic" size={20} color={colors.primary} />
+          <Text style={[styles.topBarItemText, { color: colors.primary }]}>{t('novel')}</Text>
         </TouchableOpacity>
         <View style={styles.topBarItemContainer}>
-          <TouchableOpacity style={[styles.topBarItem, { marginRight: 8 }]} onPress={() => setIsCloudOn(!isCloudOn)}>
+          <TouchableOpacity style={[topBarItemStyle, { marginRight: 8 }]} onPress={() => setIsCloudOn(!isCloudOn)}>
             {isCloudOn ? (
-              <MaterialCommunityIcons name="cloud-outline" size={24} color={colors.tint} />
+              <MaterialCommunityIcons name="cloud-outline" size={24} color={colors.primary} />
             ) : (
               <MaterialIcons name="cloud-off" size={24} color="red" />
             )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.topBarItem} onPress={() => navigation.navigate('search')}>
-            <Octicons name="search" size={24} color={colors.tint} />
+          <TouchableOpacity style={topBarItemStyle} onPress={() => navigation.navigate('search')}>
+            <Octicons name="search" size={24} color={colors.primary} />
           </TouchableOpacity>
         </View>
       </ThemedView>
@@ -48,7 +52,7 @@ export default function HomeScreen() {
 
   const ContinueListening = () => {
     return (
-      <ThemedView style={[styles.continueListening, { backgroundColor: colors.cardBackground }]}>
+      <ThemedView style={[styles.continueListening, { backgroundColor: colors.backgroundSecondary }]}>
         <TopBar />
         <ThemedText type="title">{t('keep-listening')}</ThemedText>
         <FlatList
@@ -72,7 +76,9 @@ export default function HomeScreen() {
 
   const RecentAdditions = () => {
     return (
-      <ThemedView style={styles.recentContainer}>
+      <ThemedView style={[styles.recentContainer, {
+        backgroundColor: colors.background,
+      }]}>
         <ThemedText type="title">{t('recent-additions')}</ThemedText>
         <FlatList
           data={librariesData[1].entities as any}

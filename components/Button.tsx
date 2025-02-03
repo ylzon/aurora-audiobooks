@@ -64,8 +64,8 @@ export function Button({
       default:
         return {
           bg: pressed ? colors.backgroundPress : colors.cardBackground,
-          text: colors.tint,
-          icon: colors.tint
+          text: colors.primary,
+          icon: colors.primary
         }
     }
   }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, useColorScheme } from 'react-native';
-import Feather from '@expo/vector-icons/Feather';
+import { View, Image, StyleSheet, useColorScheme } from 'react-native';
+import { PlayButton } from '@/features/player/PlayButton';
 import { Colors } from '@/constants/Colors';
 
 interface CoverItemProps {
@@ -12,12 +12,11 @@ interface CoverItemProps {
 export function CoverItem({ imageUrl, onPlayPress, size = 200 }: CoverItemProps) {
   const theme = useColorScheme();
   const colors = Colors[theme || 'light'];
+
   return (
     <View style={[styles.container, { width: size, height: size }]}>
       <Image source={{ uri: imageUrl }} style={styles.image} />
-      <TouchableOpacity style={styles.playButton} onPress={onPlayPress}>
-        <Feather name="play" size={24} color={colors.tint} />
-      </TouchableOpacity>
+      <PlayButton onPress={onPlayPress} />
     </View>
   );
 }
@@ -40,14 +39,5 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-  },
-  playButton: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 50, // 按钮宽度
-    height: 50, // 按钮高度
-    backgroundColor: 'rgba(255, 255, 255, 0.7)', // 可选：按钮背景色
-    borderRadius: 25, // 圆形按钮
   },
 });

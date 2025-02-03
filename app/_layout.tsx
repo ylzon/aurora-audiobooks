@@ -10,6 +10,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../utils/i18n';
+import { ThemeProvider as CustomThemeProvider } from '@/utils/theme';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -42,7 +43,7 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <I18nextProvider i18n={i18n}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <CustomThemeProvider>
           <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
             <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
             <Stack
@@ -61,7 +62,7 @@ export default function RootLayout() {
               />
             </Stack>
           </ThemeProvider>
-        </GestureHandlerRootView>
+        </CustomThemeProvider>
       </I18nextProvider>
     </SafeAreaProvider>
   );

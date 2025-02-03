@@ -1,11 +1,12 @@
 import React from 'react';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { Colors } from '@/constants/Colors';
-import { Feather } from '@expo/vector-icons';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useTranslation } from 'react-i18next';
+import { PlayButton } from '@/features/player/PlayButton';
+
 interface RecentAdditionItemProps {
   title?: string;
   authorName?: string;
@@ -33,9 +34,7 @@ const RecentAdditionItem: React.FC<RecentAdditionItemProps> = ({ title, authorNa
         <ThemedText style={styles.narrator}>{t('narrator')}: {narratorName || 'Unknown'}</ThemedText>
         <ThemedText style={styles.date}>{formatDate(addedAt)}</ThemedText>
       </View>
-      <TouchableOpacity style={styles.playButton} onPress={onPlayPress}>
-        <Feather name="play" size={24} color={colors.tint} />
-      </TouchableOpacity>
+      <PlayButton onPress={onPlayPress} />
     </ThemedView>
   );
 };
@@ -57,15 +56,6 @@ const styles = StyleSheet.create({
   infoContainer: {
     flex: 1,
     marginLeft: 12,
-  },
-  playButton: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 50, // 按钮宽度
-    height: 50, // 按钮高度
-    backgroundColor: '#F8F7FC', // 可选：按钮背景色
-    borderRadius: 25, // 圆形按钮
   },
   title: {
     fontSize: 16,

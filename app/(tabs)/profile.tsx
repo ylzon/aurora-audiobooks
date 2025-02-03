@@ -1,17 +1,17 @@
-import { StyleSheet, Image, Platform, TouchableOpacity, View, Button } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { getCurrentLanguage, changeLanguage } from '@/utils/i18n';
+import { useTheme } from '@/utils/theme';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function MyScreen() {
   const { t } = useTranslation();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const [currentLang, setCurrentLang] = useState(getCurrentLanguage());
 
   const handleLanguageChange = async (lng: string) => {
@@ -48,76 +48,44 @@ export default function MyScreen() {
             disabled={currentLang === 'zh'}
           />
         </View>
+        <View style={styles.themeContainer}>
+          <TouchableOpacity
+            onPress={() => setTheme('light')}
+            style={[styles.themeButton, resolvedTheme === 'light' && styles.activeTheme]}
+          >
+            <MaterialIcons
+              name="light-mode"
+              size={24}
+              color={resolvedTheme === 'light' ? '#007AFF' : '#808080'}
+            />
+            <ThemedText style={styles.themeText}>{t('light')}</ThemedText>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setTheme('dark')}
+            style={[styles.themeButton, resolvedTheme === 'dark' && styles.activeTheme]}
+          >
+            <MaterialIcons
+              name="dark-mode"
+              size={24}
+              color={resolvedTheme === 'dark' ? '#007AFF' : '#808080'}
+            />
+            <ThemedText style={styles.themeText}>{t('dark')}</ThemedText>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => setTheme('system')}
+            style={[styles.themeButton, theme === 'system' && styles.activeTheme]}
+          >
+            <MaterialIcons
+              name="settings"
+              size={24}
+              color={theme === 'system' ? '#007AFF' : '#808080'}
+            />
+            <ThemedText style={styles.themeText}>{t('system')}</ThemedText>
+          </TouchableOpacity>
+        </View>
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
     </ParallaxScrollView>
   );
 }
@@ -141,5 +109,24 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#808080',
+  },
+  themeContainer: {
+    flexDirection: 'row',
+    gap: 16,
+    marginTop: 20,
+  },
+  themeButton: {
+    alignItems: 'center',
+    padding: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+  },
+  activeTheme: {
+    borderColor: '#007AFF',
+    backgroundColor: 'rgba(0,122,255,0.1)',
+  },
+  themeText: {
+    marginTop: 4,
+    fontSize: 12,
   },
 });

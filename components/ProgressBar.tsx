@@ -41,7 +41,7 @@ export function ProgressBar({
     <SafeAreaView edges={['bottom']} style={styles.container}>
       {/* 时间显示 */}
       <View style={styles.timeContainer}>
-        <Text style={[styles.timeText, { color: colors.tint }]}>
+        <Text style={[styles.timeText, { color: colors.primary }]}>
           {formatTime(currentTime)}
         </Text>
         <Text style={[styles.timeText, { color: colors.background }]}>
@@ -71,7 +71,7 @@ export function ProgressBar({
           styles.progressTrack,
           {
             width: timelineWidth * progress,
-            backgroundColor: colors.tint
+            backgroundColor: colors.primary
           }
         ]} />
       </View>
@@ -83,7 +83,7 @@ export function ProgressBar({
         value={currentTime}
         minimumTrackTintColor="transparent"
         maximumTrackTintColor="transparent"
-        thumbTintColor={colors.tint}
+        thumbTintColor={colors.primary}
         onValueChange={onValueChange}
         onSlidingComplete={onSlidingComplete}
         thumbStyle={styles.thumb}
