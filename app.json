@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ylzon.auroraaudiobooks"
     },
     "web": {
       "bundler": "metro",
@@ -44,6 +45,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "c4d8e82b-f68b-435b-b60d-af26bf60f5b0"
+      }
     }
   }
 }
