@@ -1,33 +1,26 @@
 import { Tabs } from 'expo-router';
 import React, { memo, useEffect } from 'react';
-import { Platform, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Platform } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { SafeAreaView as SafeAreaViewContext } from 'react-native-safe-area-context';
 import { HapticTab } from '@/components/HapticTab';
 import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Easing } from 'react-native-reanimated';
+import { useSharedValue, withRepeat, withTiming, Easing } from 'react-native-reanimated';
 import itemData from '@/mock/items.json';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useTranslation } from 'react-i18next';
+import { useColors } from '@/utils/theme';
+import { PlayButton } from '@/features/player/PlayButton';
 
 const imgUrl = `http://192.168.31.5:13378/audiobookshelf/api/items/${(itemData as any).id}/cover?ts=${(itemData as any).updatedAt}`;
 
 const TabLayout = memo(() => {
-  const colorScheme = useColorScheme();
+  const colors = useColors()
   const router = useRouter();
-  const activeColor = Colors[colorScheme ?? 'light'].tint;
-  const inactiveColor = Colors[colorScheme ?? 'light'].icon;
-  const backgroundColor = Colors[colorScheme ?? 'light'].background;
-  const { t } = useTranslation();
   const rotation = useSharedValue(0);
-
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${rotation.value}deg` }],
-  }));
+  const { t } = useTranslation();
 
   useEffect(() => {
     // 匀速旋转
@@ -42,19 +35,20 @@ const TabLayout = memo(() => {
   }, []);
 
   const screenOptions: BottomTabNavigationOptions = {
-    tabBarActiveTintColor: activeColor,
-    tabBarInactiveTintColor: inactiveColor,
+    tabBarActiveTintColor: colors.iconActive,
+    tabBarInactiveTintColor: colors.icon,
     tabBarLabelStyle: {
       fontSize: 12,
       marginBottom: -10,
     },
     tabBarStyle: Platform.select({
       ios: {
-        backgroundColor: backgroundColor,
         position: 'absolute'
       },
       default: {
-        backgroundColor: backgroundColor,
+        backgroundColor: colors.backgroundSecondary,
+        borderTopColor: colors.backgroundShadow,
+        borderTopWidth: 1,
       }
     }),
     headerShown: false,
@@ -99,7 +93,7 @@ const TabLayout = memo(() => {
           options={{
             title: t('local'),
             tabBarIcon: ({ color }) => (
-              <Ionicons name="file-tray-outline" size={24} color="black" />
+              <Ionicons name="file-tray-outline" size={24} color={color} />
             ),
           }}
         />
@@ -108,60 +102,24 @@ const TabLayout = memo(() => {
           options={{
             title: t('profile'),
             tabBarIcon: ({ color }) => (
-              <AntDesign name="user" size={24} color="black" />
+              <AntDesign name="user" size={24} color={color} />
             ),
           }}
         />
       </Tabs>
-      <TouchableOpacity
-        style={[styles.playButtonWrapper, {
-          backgroundColor: Colors[colorScheme ?? 'light'].tint,
-        }]}
-        onPress={() => {
-          router.push('/play');
-        }}>
-        <Animated.Image
-          source={{ uri: imgUrl }}
-          style={[
-            styles.coverImage,
-            animatedStyles
-          ]}
-        />
-        <MaterialIcons
-          name="play-arrow"
-          size={30}
-          color="white"
-          style={styles.playButton}
-        />
-      </TouchableOpacity>
+      <PlayButton
+        type="rotato"
+        imageUrl={imgUrl}
+        onPress={() => router.push('/play')}
+        style={{
+          position: 'absolute',
+          bottom: 24,
+          left: '50%',
+          transform: [{ translateX: -30 }],
+        }}
+      />
     </SafeAreaViewContext>
   );
-});
-
-const styles = StyleSheet.create({
-  playButtonWrapper: {
-    position: 'absolute',
-    bottom: 20,
-    left: '50%',
-    transform: [{ translateX: -25 }],
-    borderRadius: 50,
-    elevation: 5,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 60,
-    height: 60,
-  },
-  coverImage: {
-    position: 'absolute',
-    top: 5,
-    left: 5,
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-  playButton: {
-  },
 });
 
 export default TabLayout;
