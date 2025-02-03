@@ -99,10 +99,6 @@ export default function HomeScreen() {
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{
-        light: Colors['light'].cardBackground,
-        dark: Colors['dark'].cardBackground
-      }}
       header={
         <ContinueListening />
       }

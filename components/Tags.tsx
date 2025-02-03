@@ -1,5 +1,6 @@
 import { Colors } from '@/constants/Colors';
-import React, { useState, useEffect, useMemo } from 'react';
+import { useColors } from '@/utils/theme';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Pressable, ScrollView, StyleSheet, useColorScheme } from 'react-native';
 
 interface TagItem {
@@ -31,10 +32,7 @@ const FONT_SIZE = 14;
 const PADDING = 12;
 
 export function Tags(props: TagsProps) {
-  const theme = useColorScheme();
-  const colors = Colors[theme || 'light'];
-
-  // 根据 multi 属性初始化状态类型
+  const colors = useColors();
   const [selected, setSelected] = useState<string | string[] | null>(
     props.multi ? [] : null
   );
@@ -76,14 +74,17 @@ export function Tags(props: TagsProps) {
       <Pressable
         key={tag.key}
         onPress={() => handlePress(tag.key)}
-        style={[
+        style={({ pressed }) => [
           {
             ...styles.tag,
             backgroundColor: colors.tagBackground,
+            borderColor: colors.tagBackground,
+            opacity: pressed ? 0.8 : 1,
           },
           isSelected && {
             ...styles.tagSelected,
             backgroundColor: colors.tagSelectedBackground,
+            borderColor: colors.tagSelectedBackground,
           },
         ]}
       >
@@ -92,6 +93,7 @@ export function Tags(props: TagsProps) {
             {
               ...styles.tagText,
               color: colors.tagText,
+              fontWeight: '400',
             },
             isSelected && {
               ...styles.tagTextSelected,
@@ -136,17 +138,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: PADDING,
     borderRadius: 20,
     margin: 5,
-    boxSizing: 'border-box',
+    borderWidth: 1,
+    borderColor: 'transparent',
   },
   tagSelected: {
-    backgroundColor: '#007AFF',
   },
   tagText: {
     fontSize: FONT_SIZE,
-    color: '#333',
-    textAlign: 'center', // 确保文本水平居中
+    textAlign: 'center',
+    fontWeight: '500',
   },
   tagTextSelected: {
-    color: '#fff',
   },
 });

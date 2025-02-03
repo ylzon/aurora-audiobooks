@@ -1,5 +1,5 @@
-import { View, ViewStyle, StyleSheet, useColorScheme, DimensionValue } from 'react-native';
-import { Colors } from '../constants/Colors';
+import { View, ViewStyle, StyleSheet, DimensionValue } from 'react-native';
+import { useColors } from '@/utils/theme';
 
 export interface DividerProps {
   direction?: 'horizontal' | 'vertical';
@@ -14,8 +14,7 @@ export default function Divider({
   margin = 0,
   style
 }: DividerProps) {
-  const theme = useColorScheme();
-  const colors = Colors[theme || 'light'];
+  const colors = useColors();
   const baseStyle: ViewStyle = direction === 'horizontal'
     ? styles.horizontal
     : styles.vertical;

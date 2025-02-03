@@ -1,4 +1,4 @@
-import { Colors } from '@/constants/Colors';
+import { useColors } from '@/utils/theme';
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Text,
@@ -7,7 +7,6 @@ import {
   TouchableWithoutFeedback,
   ViewStyle,
   TextStyle,
-  useColorScheme,
 } from 'react-native';
 
 interface SwitchProps {
@@ -42,8 +41,7 @@ interface SwitchProps {
 }
 
 export const Switch = (props: SwitchProps) => {
-  const theme = useColorScheme();
-  const colors = Colors[theme || 'light'];
+  const colors = useColors();
   const {
     onValueChange = () => { },
     disabled = false,
@@ -157,8 +155,11 @@ export const Switch = (props: SwitchProps) => {
           {
             backgroundColor: interpolatedColorAnimation,
             width: circleSize * switchWidthMultiplier + 2.5,
-            height: barHeight || circleSize,
+            height: (barHeight || circleSize) + 2,
             borderRadius: switchBorderRadius || circleSize,
+            borderWidth: 1,
+            borderColor: colors.divider,
+            marginRight: 2,
           },
         ]}
       >
@@ -188,6 +189,11 @@ export const Switch = (props: SwitchProps) => {
                 width: circleSize,
                 height: circleSize,
                 borderRadius: circleSize / 2,
+                shadowColor: colors.backgroundShadow,
+                elevation: 2,
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.2,
+                shadowRadius: 4,
               },
               innerCircleStyle,
             ]}
@@ -211,7 +217,6 @@ const styles = StyleSheet.create({
     width: 78,
     height: 30,
     borderRadius: 30,
-    backgroundColor: 'black',
   },
   animatedContainer: {
     flex: 1,
@@ -224,15 +229,12 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: 'white',
-    shadowColor: 'black',
-    elevation: 5,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    elevation: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   text: {
-    color: 'white',
     backgroundColor: 'transparent',
   },
   paddingRight: {

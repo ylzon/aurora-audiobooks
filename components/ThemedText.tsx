@@ -19,12 +19,11 @@ export function ThemedText({
   return (
     <Text
       style={[
-        type === 'default' ? styles.default : undefined,
+        type === 'default' ? { ...styles.default, color: colors.text } : undefined,
         type === 'title' ? { ...styles.title, color: colors.title } : undefined,
         type === 'subtitle' ? { ...styles.subtitle, color: colors.subtitle } : undefined,
         type === 'link' ? { ...styles.link, color: colors.link } : undefined,
         style,
-        { color: colors.text },
       ]}
       {...rest}
     />
@@ -33,7 +32,7 @@ export function ThemedText({
 
 const styles = StyleSheet.create({
   default: {
-    fontSize: 16,
+    fontSize: 14,
     lineHeight: 24,
     // 字间距
     letterSpacing: 1,

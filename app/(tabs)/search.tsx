@@ -28,10 +28,6 @@ export default function SearchScreen() {
     <ParallaxScrollView
       headerHeight={110}
       fixedHeader
-      headerBackgroundColor={{
-        light: Colors['light'].cardBackground,
-        dark: Colors['dark'].cardBackground
-      }}
       header={
         <View style={styles.headerContainer}>
           <TouchableOpacity

@@ -41,10 +41,10 @@ export function ProgressBar({
     <SafeAreaView edges={['bottom']} style={styles.container}>
       {/* 时间显示 */}
       <View style={styles.timeContainer}>
-        <Text style={[styles.timeText, { color: colors.primary }]}>
+        <Text style={[styles.timeText, { color: colors.text }]}>
           {formatTime(currentTime)}
         </Text>
-        <Text style={[styles.timeText, { color: colors.background }]}>
+        <Text style={[styles.timeText, { color: colors.subtitle }]}>
           {formatTime(duration)}
         </Text>
       </View>
@@ -53,7 +53,7 @@ export function ProgressBar({
       <View style={styles.trackContainer}>
         {/* 基础轨道 */}
         <View style={[styles.baseTrack, {
-          backgroundColor: colors.background,
+          backgroundColor: colors.progressBarTrack,
           width: timelineWidth,
         }]} />
 
@@ -62,7 +62,7 @@ export function ProgressBar({
           styles.bufferedTrack,
           {
             width: timelineWidth * bufferedProgress,
-            backgroundColor: colors.bufferBackground
+            backgroundColor: colors.progressBarTrackBuffer
           }
         ]} />
 
@@ -71,7 +71,7 @@ export function ProgressBar({
           styles.progressTrack,
           {
             width: timelineWidth * progress,
-            backgroundColor: colors.primary
+            backgroundColor: colors.progressBarTrackActive
           }
         ]} />
       </View>
@@ -83,7 +83,7 @@ export function ProgressBar({
         value={currentTime}
         minimumTrackTintColor="transparent"
         maximumTrackTintColor="transparent"
-        thumbTintColor={colors.primary}
+        thumbTintColor={colors.progressBarThumb}
         onValueChange={onValueChange}
         onSlidingComplete={onSlidingComplete}
         thumbStyle={styles.thumb}

@@ -3,7 +3,7 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
-import { changeOpacity, darken, lighten } from "@/utils/colors";
+import { changeOpacity } from "@/utils/colors";
 
 const common = {
   danger: '#FF3B30',
@@ -11,6 +11,7 @@ const common = {
   dark: '#1b1d21',
   grey: '#808190',
   green: '#8cb880',
+  lightGrey: '#3d3e43',
 }
 
 // light
@@ -45,6 +46,7 @@ export const Colors = {
     description: common.grey,
     text: common.dark,
     link: light.primary,
+    textPlaceholder: changeOpacity(common.dark, 0.5),
 
     // Icon
     icon: common.grey,
@@ -52,13 +54,13 @@ export const Colors = {
 
     // ProgressBar
     progressBarThumb: light.primary,
-    progressBarTrack: changeOpacity(light.primary, 0.3),
-    progressBarTrackBuffer: changeOpacity(light.primary, 0.6),
+    progressBarTrack: changeOpacity(common.white, 0.2),
+    progressBarTrackBuffer: changeOpacity(common.white, 0.3),
     progressBarTrackActive: light.primary,
 
     // Switch
     switchTrackActive: light.primary,
-    switchTrackInactive: light.accent,
+    switchTrackInactive: common.grey,
     switchThumb: common.white,
 
     // Tags
@@ -71,8 +73,22 @@ export const Colors = {
     divider: light.accent,
 
     // Button
-    buttonBackground: '#F8F7FC',
-    buttonText: common.white,
+    buttonBackground: light.accent,
+    buttonText: light.primary,
+    buttonDisabledBackground: changeOpacity(light.accent, 0.5),
+    buttonDisabledText: changeOpacity(light.primary, 0.5),
+    buttonPrimaryBackground: light.primary,
+    buttonPrimaryText: common.white,
+    buttonPrimaryDisabledBackground: changeOpacity(light.primary, 0.5),
+    buttonPrimaryDisabledText: changeOpacity(common.white, 0.5),
+    buttonDangerBackground: common.danger,
+    buttonDangerText: common.white,
+    buttonDangerDisabledBackground: changeOpacity(common.danger, 0.5),
+    buttonDangerDisabledText: changeOpacity(common.white, 0.5),
+    buttonSuccessBackground: common.green,
+    buttonSuccessText: common.white,
+    buttonSuccessDisabledBackground: changeOpacity(common.green, 0.5),
+    buttonSuccessDisabledText: changeOpacity(common.white, 0.5),
   },
   dark: {
     ...common,
@@ -90,6 +106,7 @@ export const Colors = {
     description: changeOpacity(common.white, 0.4),
     text: common.white,
     link: dark.primary,
+    textPlaceholder: changeOpacity(common.white, 0.5),
 
     // Icon
     icon: common.grey,
@@ -97,13 +114,13 @@ export const Colors = {
 
     // ProgressBar
     progressBarThumb: dark.primary,
-    progressBarTrack: changeOpacity(dark.primary, 0.3),
-    progressBarTrackBuffer: changeOpacity(dark.primary, 0.6),
+    progressBarTrack: changeOpacity(common.white, 0.2),
+    progressBarTrackBuffer: changeOpacity(common.white, 0.3),
     progressBarTrackActive: dark.primary,
 
     // Switch
     switchTrackActive: dark.primary,
-    switchTrackInactive: dark.accent,
+    switchTrackInactive: common.lightGrey,
     switchThumb: common.white,
 
     // Tags
@@ -116,7 +133,21 @@ export const Colors = {
     divider: dark.accent,
 
     // Button
-    buttonBackground: '#2A2A2A',
-    buttonText: common.white,
+    buttonBackground: dark.accent,
+    buttonText: dark.primary,
+    buttonDisabledBackground: changeOpacity(dark.accent, 0.5),
+    buttonDisabledText: changeOpacity(dark.primary, 0.5),
+    buttonPrimaryBackground: dark.primary,
+    buttonPrimaryText: common.white,
+    buttonPrimaryDisabledBackground: changeOpacity(dark.primary, 0.5),
+    buttonPrimaryDisabledText: changeOpacity(common.white, 0.5),
+    buttonDangerBackground: common.danger,
+    buttonDangerText: common.white,
+    buttonDangerDisabledBackground: changeOpacity(common.danger, 0.5),
+    buttonDangerDisabledText: changeOpacity(common.white, 0.5),
+    buttonSuccessBackground: common.green,
+    buttonSuccessText: common.white,
+    buttonSuccessDisabledBackground: changeOpacity(common.green, 0.5),
+    buttonSuccessDisabledText: changeOpacity(common.white, 0.5),
   },
 };

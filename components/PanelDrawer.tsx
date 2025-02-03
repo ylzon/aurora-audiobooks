@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, useColorScheme } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { SwipeablePanel, SwipeablePanelProps } from './ui/SwipeablePanel';
-import { Colors } from '@/constants/Colors';
+import { useColors } from '@/utils/theme';
+import { ThemedText } from './ThemedText';
 
 interface PanelDrawerProps extends Omit<SwipeablePanelProps, 'isActive' | 'children'> {
   title: string;
@@ -21,8 +22,7 @@ export function PanelDrawer({
   subTitle,
   ...panelProps
 }: PanelDrawerProps) {
-  const theme = useColorScheme();
-  const colors = Colors[theme || 'light'];
+  const colors = useColors();
   return (
     <SwipeablePanel
       {...panelProps}
@@ -31,15 +31,14 @@ export function PanelDrawer({
       fullWidth
       noBar={false}
       closeOnTouchOutside
-      style={[styles.panelStyle, { backgroundColor: colors.cardBackground }]}
+      style={[styles.panelStyle, { backgroundColor: colors.backgroundSecondary }]}
       onlyLarge
     >
       <View style={styles.headerContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{title}</Text>
-          {subTitle && <Text style={styles.subtitle}>{subTitle}</Text>}
+          <ThemedText type='title' style={styles.title}>{title}</ThemedText>
+          {subTitle && <ThemedText style={styles.subtitle}>{subTitle}</ThemedText>}
         </View>
-
         {rightSlot && (
           <View style={styles.rightSlot}>
             {rightSlot}
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 6,
   },
   titleContainer: {
     display: 'flex',
@@ -77,14 +76,11 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   title: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#1a1a1a',
+    marginBottom: 0,
   },
   subtitle: {
-    fontSize: 14,
-    color: '#666',
     marginLeft: 8,
+    marginBottom: 0,
   },
   rightSlot: {
     alignSelf: 'flex-start',

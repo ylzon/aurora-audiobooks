@@ -25,7 +25,6 @@ export default function MyScreen() {
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
       header={
         <IconSymbol
           size={310}
